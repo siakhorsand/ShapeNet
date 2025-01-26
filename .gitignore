@@ -1,2 +1,4 @@
 Data/*.npy
 vash/lib/**/*.dylib
+Data/*.npy
+vash/lib/**/*.dylib
