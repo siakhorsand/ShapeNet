@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shape Classifier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    #canvas-container {
+      display: inline-block;
+      position: relative;
+      border: 2px solid #333;
+      background: #fff;
+    }
+    #canvas {
+      cursor: crosshair;
+    }
+    button {
+      margin: 10px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Draw a Shape (Triangle, Circle, Square, Hexagon, or Octagon)</h1>
+  <div id="canvas-container">
+    <canvas id="canvas" width="280" height="280"></canvas>
+  </div>
+  <br>
+  <button id="clearBtn">Clear</button>
+  <button id="predictBtn">Predict</button>
+  <p id="result"></p>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+
+    canvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!drawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      drawing = false;
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      document.getElementById('result').textContent = "";
+    });
+
+    document.getElementById('predictBtn').addEventListener('click', async () => {
+      const dataUrl = canvas.toDataURL('image/png');
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: dataUrl })
+        });
+        if (!response.ok) throw new Error('Prediction request failed.');
+        
+        const result = await response.json();
+        const shape = result.prediction;
+        const conf = (result.confidence * 100).toFixed(2);
+        document.getElementById('result').textContent =
+          `Prediction: ${shape} (Confidence: ${conf}%)`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('result').textContent = "Error making prediction.";
+      }
+    });
+  </script>
+</body>
+</html>
