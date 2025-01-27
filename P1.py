@@ -9,11 +9,12 @@ import tensorflow as tf
 
 app = Flask(__name__)
 
+
 # Match the order used in training
-CLASS_NAMES = ['triangle', 'circle', 'square', 'hexagon', 'octagon']
+CLASS_NAMES = ['circle', 'square', 'triangle', 'hexagon', 'octagon']
 
 # Load the model
-model = tf.keras.models.load_model("shape_model.h5")
+model = tf.keras.models.load_model("shapes_model.h5")
 
 @app.route('/')
 def serve_index():
@@ -51,4 +52,6 @@ def predict():
 
 if __name__ == '__main__':
     # Start Flask
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
+
+    #http://127.0.0.1:5000/
