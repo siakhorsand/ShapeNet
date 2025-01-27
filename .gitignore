@@ -2,3 +2,30 @@ Data/*.npy
 vash/lib/**/*.dylib
 Data/*.npy
 vash/lib/**/*.dylib
+vash/bin/
+# Ignore model files
+*.h5
+*.hdf5
+
+# Ignore large training files and datasets
+*.csv
+*.npz
+*.npy
+*.pkl
+
+# Ignore cache and temporary files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Ignore logs
+*.log
+
+# Ignore environment-related files
+.env
+venv/
+.DS_Store
+
+# Ignore large raw data files
+data/
+datasets/
