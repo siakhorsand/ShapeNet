@@ -26,18 +26,17 @@ def predict():
     if not data:
         return jsonify({"error": "No image data provided"}), 400
     
-    # Typically "data:image/png;base64,..." 
     if "," in data:
         data = data.split(",")[1]
     image_data = base64.b64decode(data)
     
-    # Convert to grayscale
     img = Image.open(io.BytesIO(image_data)).convert('L')
-    # Resize to 28x28 if that’s what your model expects
     img = img.resize((28, 28))
-    
+    # Binarize and invert colors
+    img = img.point(lambda p: 255 if p > 127 else 0)  # Binarize
     img_arr = np.array(img).astype('float32') / 255.0
-    # Expand dims => (1, 28, 28, 1)
+    img_arr = 1.0 - img_arr  # Invert to match training data
+    
     img_arr = np.expand_dims(img_arr, axis=(0, -1))
     
     preds = model.predict(img_arr)

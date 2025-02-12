@@ -1,4 +1,5 @@
 tensorflow
+tensorflow.keras 
 Flask
 numpy==1.23.5
 pandas==1.5.2

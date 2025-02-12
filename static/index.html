@@ -4,31 +4,63 @@
   <meta charset="UTF-8">
   <title>Shape Classifier</title>
   <style>
+    <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 20px;
+        background: #000;
+        color: #0ff;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
     }
-    #canvas-container {
-      display: inline-block;
-      position: relative;
-      border: 2px solid #333;
-      background: #fff;
+
+    .canvas-container {
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #0ff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 20px #0ff;
+        margin: 20px;
     }
+
     #canvas {
-      cursor: crosshair;
+        background: #000;
+        border-radius: 8px;
+        cursor: crosshair;
     }
+
+    .buttons {
+        margin: 20px;
+        display: flex;
+        gap: 15px;
+    }
+
     button {
-      margin: 10px;
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
+        background: #0ff;
+        color: #000;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
     }
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
+
+    button:hover {
+        background: #0dd;
+        box-shadow: 0 0 15px #0ff;
     }
+
+    #prediction {
+        font-size: 24px;
+        margin-top: 20px;
+        text-shadow: 0 0 10px #0ff;
+    }
+</style>
   </style>
 </head>
 <body>
