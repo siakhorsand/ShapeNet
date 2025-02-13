@@ -1,5 +1,5 @@
 Data/*.npy
-vash/lib/**/*.dylib
+vash/*
 Data/*.npy
 vash/lib/**/*.dylib
 vash/bin/
@@ -25,6 +25,3 @@ __pycache__/
 .env
 venv/
 .DS_Store
-
-# Ignore large raw data files
-/vash/
