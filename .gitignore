@@ -27,5 +27,4 @@ venv/
 .DS_Store
 
 # Ignore large raw data files
-data/
-datasets/
+/vash/
