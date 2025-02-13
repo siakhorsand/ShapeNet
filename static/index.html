@@ -217,7 +217,7 @@
         let predictTimeout = null;
 
         function initCanvas() {
-            // Use white background and black stroke to match training data
+            // us white background and black stroke to match training data
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.strokeStyle = 'black';
@@ -232,10 +232,8 @@
             const container = document.getElementById('probabilities');
             const sortedProbs = Object.entries(probabilities)
                 .sort((a, b) => b[1] - a[1]);
-            
-            // First time or after clear - create all bars
             if (container.children.length === 0 || container.children[0].className !== 'probability-bar') {
-                container.innerHTML = ''; // Clear any "Start drawing" message
+                container.innerHTML = ''; 
                 sortedProbs.forEach(([shape, probability], index) => {
                     const percent = (probability * 100).toFixed(1);
                     const barDiv = document.createElement('div');
@@ -346,7 +344,7 @@
                 } else {
                     const confidence = (data.confidence * 100).toFixed(2);
                     document.getElementById('result').innerHTML = 
-                        `<div class="prediction">Predicted Shape: ${data.prediction}</div>
+                        `<div class="prediction">It's a ${data.prediction}!</div>
                          <div>Confidence: ${confidence}%</div>`;
                     
                     updateProbabilityBars(data.probabilities);
