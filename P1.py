@@ -11,7 +11,7 @@ app = Flask(__name__, static_folder='static')
 CLASS_NAMES = ['circle', 'square', 'triangle', 'hexagon', 'octagon']
 
 # load the model with custom compile options
-model = tf.keras.models.load_model("shapes_model.keras", compile=False)
+model = tf.keras.models.load_model("Models/shapes_model.keras", compile=False)
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 @app.route('/')
